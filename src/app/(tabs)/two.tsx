@@ -2,21 +2,23 @@ import {Button, StyleSheet} from 'react-native';
 
 import EditScreenInfo from '@/components/EditScreenInfo';
 import {Text, View} from '@/components/Themed';
-import {addDoc, collection, getFirestore} from "@firebase/firestore";
+import {collection, deleteDoc, doc, getFirestore} from "@firebase/firestore";
 import {firebaseApp} from "@/firebase/firebaseConfig";
 
 export default function TabTwoScreen() {
 
     const addData = async () => {
-        const db = getFirestore(firebaseApp)
+        const db = getFirestore(firebaseApp);
         const data = {
             name: "car",
             age: 19,
-        }
+        };
 
-        const col = collection(db, "data") //reference to collection
-        // const document =doc(db, "data", "data1")
-        await addDoc(col, data)
+        const col = collection(db, "data"); // reference ke collection
+        const document = doc(db, "data", "data1");
+        // await addDoc(col, data);
+        // await setDoc(document, data);
+        await deleteDoc(document);
     }
     return (
         <View style={styles.container}>
