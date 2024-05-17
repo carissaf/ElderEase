@@ -54,20 +54,20 @@ export default function SignUp() {
             title="Username"
             value=""
             placeholder=""
-            iconname="person-outline"
+            icon="person-outline"
           />
           <FormField
             title="Password"
             value=""
             placeholder=""
-            iconname="lock-closed-outline"
+            icon="lock-closed-outline"
           />
 
           <FormField
             title="Phone Number"
             value=""
             placeholder=""
-            iconname="call-outline"
+            icon="call-outline"
           />
         </View>
 

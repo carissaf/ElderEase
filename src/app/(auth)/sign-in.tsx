@@ -52,13 +52,13 @@ export default function SignIn() {
           title="Username"
           value=""
           placeholder=""
-          iconname="person-outline"
+          icon="person-outline"
         />
         <FormField
           title="Password"
           value=""
           placeholder=""
-          iconname="lock-closed-outline"
+          icon="lock-closed-outline"
         />
 
         <CustomButton

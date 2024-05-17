@@ -9,13 +9,6 @@ interface ActivityButtonProps {
   color2: string;
 }
 
-interface Voice {
-  identifier: string;
-  name: string;
-  quality: string;
-  language: string;
-}
-
 export default function ActivityButton({ title, color1, color2 }: ActivityButtonProps) {
   const speak = () => {
     const optionsSpeech = { voice: "id-id-x-idd-local" };
