@@ -26,7 +26,7 @@ export default function ActivityButton({ title, color1, color2 }: ActivityButton
         style={{ flex: 1, position: "absolute", left: 0, right: "100%", top: 0, bottom: 0 }}
       />
       <Text
-        className="p-6 text-3xl text-white"
+        className="p-6 text-3xl text-white text-center"
         style={{ fontFamily: "Inter_700Bold" }}>
         {title}
       </Text>

@@ -21,7 +21,7 @@ export default function FeatureButton({ title, icon, color, onPress }: FeatureBu
         size={48}
       />
       <Text
-        className="text-2xl mt-1"
+        className="text-2xl mt-1 text-center"
         style={{ fontFamily: "Inter_600SemiBold", color: color }}>
         {title}
       </Text>
