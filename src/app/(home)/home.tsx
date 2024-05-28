@@ -23,7 +23,7 @@ export default function Home() {
         className="text-3xl mb-5"
         style={styles.text}>
         Halo, <Text style={styles.title}>Sumiyarti</Text> 👋
-      </Text>
+      </Text>halooo
 
       {/*Tombol Aktivitas*/}
       <View className="flex">
