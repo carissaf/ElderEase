@@ -19,15 +19,15 @@ export default function ReadTextCamera() {
     type == CameraType.back ? setType(CameraType.front) : setType(CameraType.back);
   };
 
-  // if (!permission) {
-  //   //permission loading
-  //   return <View />;
-  // }
+  if (!permission) {
+    //permission loading
+    return <View />;
+  }
 
-  // if (!permission.granted) {
-  //   //not granted
-  //   return <View></View>;
-  // }
+  if (!permission.granted) {
+    //not granted
+    return <View></View>;
+  }
   const handleTakePicture = async () => {
     if (cameraRef.current) {
       const picture: CameraCapturedPicture | undefined = await cameraRef.current.takePictureAsync();
