@@ -61,12 +61,17 @@ export default function TabLayout() {
       <View className="bg-white h-3/5 px-10 bottom-0 rounded-t-3xl items-center">
         <EllipseGreen className="absolute left-[-15%] bottom-0" />
         <Text
-          className="text-3xl mt-32 flex w-full"
+          className="text-3xl mt-32 flex w-full text-black"
           style={{ fontFamily: "Inter_400Regular" }}>
-          Selamat Datang di <Text style={{ fontFamily: "Inter_700Bold" }}>ElderEase</Text>
+          Selamat Datang di{" "}
+          <Text
+            className="text-black"
+            style={{ fontFamily: "Inter_700Bold" }}>
+            ElderEase
+          </Text>
         </Text>
         <Text
-          className="mt-5 mb-10 flex w-full"
+          className="mt-5 mb-10 flex w-full text-black"
           style={{ fontFamily: "Inter_400Regular" }}>
           ElderEase adalah rekan ramah Anda yang dirancang untuk memudahkan komunikasi bagi para manula. Bergabunglah bersama kami untuk menjadikan
           interaksi sehari-hari lebih sederhana dan lebih mudah diakses oleh semua orang!
