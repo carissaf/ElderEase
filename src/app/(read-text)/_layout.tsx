@@ -4,8 +4,14 @@ import ReadTextCamera from "@/app/(read-text)/read-text-camera";
 import ReadTextResult from "@/app/(read-text)/read-text-result";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { RootStackParamList } from "@/app/(read-text)/navigation";
+import { Inter_400Regular, Inter_600SemiBold, Inter_700Bold, useFonts } from "@expo-google-fonts/inter";
 
 export default function ReadText() {
+  const [fontsLoaded] = useFonts({
+    Inter_400Regular,
+    Inter_700Bold,
+    Inter_600SemiBold,
+  });
   const Stack = createNativeStackNavigator<RootStackParamList>();
   return (
     <Stack.Navigator initialRouteName="ReadTextCamera">

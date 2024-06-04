@@ -72,6 +72,7 @@ export default function SignUp() {
         </View>
 
         <CustomButton
+          textStyles=""
           title="Lanjut"
           onPress={() => router.push("../home")}
         />

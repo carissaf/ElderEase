@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from pytesseract import pytesseract
+from gtts import gTTS
 from flask_cors import CORS
 from PIL import Image
 import os
@@ -28,6 +29,8 @@ def process_img():
 #     image = Image.open('Screenshot 2024-05-29 203736.png')
     text = pytesseract.image_to_string(image, lang='ind')
     text = text.replace("\n", " ")
+#     tts = gTTS(text=text, lang='id')
+#     tts.save("speech.mp3")
 #     os.remove(temp_image_path)
     return jsonify({'text': text})
 

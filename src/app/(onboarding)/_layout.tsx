@@ -77,6 +77,7 @@ export default function TabLayout() {
           interaksi sehari-hari lebih sederhana dan lebih mudah diakses oleh semua orang!
         </Text>
         <CustomButton
+          textStyles=""
           title="Mulai"
           onPress={() => router.push("../sign-up")}
         />

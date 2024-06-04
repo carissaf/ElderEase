@@ -62,6 +62,7 @@ export default function SignIn() {
         />
 
         <CustomButton
+          textStyles=""
           title="Masuk"
           onPress={() => router.push("home")}
         />
