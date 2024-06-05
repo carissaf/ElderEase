@@ -77,7 +77,7 @@ export default function Home() {
               title="Telepon Darurat"
               icon="call-outline"
               color="#E06C73"
-              onPress={() => console.log("fjkadsfj")}
+              onPress={() => router.push("../emergency-call-list")}
             />
 
             <FeatureButton

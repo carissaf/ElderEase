@@ -48,6 +48,9 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "permissions": [
+      "android.permission.CALL_PHONE"
+    ]
   }
 }

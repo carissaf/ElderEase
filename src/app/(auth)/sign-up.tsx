@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Text, View } from "react-native";
 import { Inter_400Regular, Inter_700Bold, useFonts } from "@expo-google-fonts/inter";
@@ -11,6 +11,11 @@ import CustomLink from "@/components/CustomLink";
 import { router } from "expo-router";
 
 export default function SignUp() {
+  const [form, setForm] = useState({
+    username: "",
+    password: "",
+    phonenumber: "",
+  });
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
     Inter_700Bold,
@@ -52,20 +57,23 @@ export default function SignUp() {
         <View className="w-full mb-[50%]">
           <FormField
             title="Username"
-            value=""
+            value={form.username}
+            handleChangeText={(text) => setForm({ ...form, username: text })}
             placeholder=""
             icon="person-outline"
           />
           <FormField
             title="Password"
-            value=""
+            value={form.password}
+            handleChangeText={(text) => setForm({ ...form, password: text })}
             placeholder=""
             icon="lock-closed-outline"
           />
 
           <FormField
             title="Phone Number"
-            value=""
+            value={form.phonenumber}
+            handleChangeText={(text) => setForm({ ...form, phonenumber: text })}
             placeholder=""
             icon="call-outline"
           />

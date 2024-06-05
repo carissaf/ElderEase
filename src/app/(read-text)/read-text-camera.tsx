@@ -20,6 +20,8 @@ export default function ReadTextCamera() {
   const navigation = useNavigation<NavigationProp>();
   const [imagePicked, setImagePicked] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [pictureSize, setPictureSize] = useState<string>();
+  const [availableSizes, setAvailableSizes] = useState<string[] | undefined>([]);
 
   const styles = StyleSheet.create({
     text: { fontFamily: "Inter_400Regular" },
@@ -108,9 +110,12 @@ export default function ReadTextCamera() {
       </View>
     );
   }
+
   const handleTakePicture = async () => {
     if (cameraRef.current) {
-      const picture: CameraCapturedPicture | undefined = await cameraRef.current.takePictureAsync();
+      const picture: CameraCapturedPicture | undefined = await cameraRef.current.takePictureAsync({
+        quality: 0,
+      });
       if (picture) {
         console.log("Picture taken:", picture);
         await uploadImage(picture.uri);
@@ -159,7 +164,8 @@ export default function ReadTextCamera() {
     try {
       // http://10.0.2.2:5000/process_img
       // https://4c5f-140-213-136-24.ngrok-free.app/process_img
-      const response = await fetch("http://10.0.2.2:5000/process_img", {
+      // http://192.168.188.158/process_img
+      const response = await fetch("https://cec6-112-215-225-1.ngrok-free.app/process_img", {
         method: "POST",
         body: formData,
         headers: {
