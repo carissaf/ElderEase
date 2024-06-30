@@ -4,34 +4,19 @@ import { LinearGradient } from "expo-linear-gradient";
 import PolygonPurple from "@/assets/images/PolygonPurple.svg";
 import EllipseGreen from "@/assets/images/EllipseGreen.svg";
 import { Text, View } from "react-native";
-import FormField from "@/components/FormField";
 import CustomButton from "@/components/CustomButton";
-import { Inter_400Regular, Inter_700Bold, useFonts } from "@expo-google-fonts/inter";
-import { router, useNavigation } from "expo-router";
 import CustomLink from "@/components/CustomLink";
-import { RootStackParamList } from "@/app/navigation";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { signIn } from "@/firebase/firebaseService";
+import { OtpInput } from "react-native-otp-entry";
+import { useRoute } from "@react-navigation/native";
+import { ConfirmOTPRouteProp } from "@/app/navigation";
+import { useNavigation } from "expo-router";
 
-type NavigationProp = NativeStackNavigationProp<RootStackParamList, "SignIn">;
-export default function SignIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [emailIsTaken, setEmailIsTaken] = useState(false);
-  const navigation = useNavigation<NavigationProp>();
-  const [fontsLoaded] = useFonts({
-    Inter_400Regular,
-    Inter_700Bold,
-  });
+export default function ConfirmOTP() {
+  const navigation = useNavigation();
+  const route = useRoute<ConfirmOTPRouteProp>();
+  const { email, username, password }: { email: string; username: string; password: string } = route.params;
+  const [otp, setOtp] = useState("");
 
-  if (!fontsLoaded) {
-    return null;
-  }
-
-  const handleSignIn = async () => {
-    // navigation.navigate("Home");
-    await signIn(email, password);
-  };
   return (
     <SafeAreaView className="bg-white relative h-full w-full">
       <LinearGradient
@@ -58,40 +43,42 @@ export default function SignIn() {
       <Text
         className="text-3xl text-black mt-10 px-5 w-full"
         style={{ fontFamily: "Inter_700Bold" }}>
-        Masuk
+        Kode OTP
       </Text>
       <View className="bg-white w-full mt-5 px-[7%] h-full rounded-t-3xl items-center">
-        <View className="mb-[50%]">
-          <FormField
-            title="Email"
-            value={email}
-            handleChangeText={setEmail}
-            placeholder=""
-            icon="mail-outline"
-            error={emailIsTaken}
-          />
-          <FormField
-            title="Password"
-            value={password}
-            handleChangeText={setPassword}
-            placeholder=""
-            icon="lock-closed-outline"
-            error={false}
-          />
+        <View className="w-full mb-[50%]">
+          <Text
+            className="mt-10 mb-5"
+            style={{ fontFamily: "Inter_400Regular" }}>
+            Kami telah mengirimkan kode OTP ke {email}
+          </Text>
+          <OtpInput
+            numberOfDigits={4}
+            onTextChange={(text) => setOtp(text)}
+            focusColor="#2F79E9"
+            focusStickBlinkingDuration={600}
+            theme={{
+              pinCodeContainerStyle: { width: 72, height: 84, borderWidth: 1.5 },
+            }}></OtpInput>
         </View>
 
         <CustomButton
           textStyles=""
-          title="Masuk"
-          onPress={() => router.push("home")}
+          title="Kirim"
+          onPress={() => {}}
         />
+
         <View className="flex flex-row items-center mt-2">
-          <Text className="mr-1">Belum memiliki akun?</Text>
+          <Text
+            style={{ fontFamily: "Inter_400Regular" }}
+            className="mr-1">
+            Belum menerima kode OTP?
+          </Text>
           <CustomLink
-            title="Daftar"
-            href="./sign-up"
+            title="Kirimkan Ulang"
+            href="./sign-in"
             onPress={() => {
-              navigation.navigate("SignUp");
+              // navigation.navigate("Home");
             }}
           />
         </View>

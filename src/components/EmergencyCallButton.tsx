@@ -1,6 +1,7 @@
 import React from "react";
 import {Linking, Text, TouchableOpacity} from "react-native";
 import {LinearGradient} from "expo-linear-gradient";
+// import call from "react-native-phone-call";
 
 // import RNImmediatePhoneCall from "react-native-immediate-phone-call";
 
@@ -10,9 +11,15 @@ interface EmergencyCallButtonProps {
 }
 
 export default function EmergencyCallButton({ name, phonenumber }: EmergencyCallButtonProps) {
+  // const args = {
+  //   number: { phonenumber }, // String value with the number to call
+  //   prompt: false, // Optional boolean property. Determines if the user should be prompted prior to the call
+  //   skipCanOpen: true, // Skip the canOpenURL check
+  // };
   const handleCall = () => {
     // RNImmediatePhoneCall.immediatePhoneCall(phonenumber);
     Linking.openURL(`tel:${phonenumber}`);
+    // call(args).catch(console.error);
   };
   return (
     <TouchableOpacity

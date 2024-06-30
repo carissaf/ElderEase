@@ -8,14 +8,22 @@ import EllipseGreen from "@/assets/images/EllipseGreen.svg";
 import FormField from "@/components/FormField";
 import CustomButton from "@/components/CustomButton";
 import CustomLink from "@/components/CustomLink";
-import { router } from "expo-router";
+import { RootStackParamList } from "@/app/navigation";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { router, useNavigation } from "expo-router";
+import { checkUsernameExists, createUser } from "@/firebase/firebaseService";
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, "SignUp">;
 
 export default function SignUp() {
-  const [form, setForm] = useState({
-    username: "",
-    password: "",
-    phonenumber: "",
-  });
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [usernameIsTaken, setUsernameIsTaken] = useState(false);
+  const [emailIsTaken, setEmailIsTaken] = useState(false);
+  const navigation = useNavigation<NavigationProp>();
+
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
     Inter_700Bold,
@@ -24,6 +32,34 @@ export default function SignUp() {
   if (!fontsLoaded) {
     return null;
   }
+
+  const handleSignUp = async () => {
+    if (await checkUsernameExists(username)) {
+      setUsernameIsTaken(true);
+      return;
+    }
+
+    setUsernameIsTaken(false);
+    await createUser(email, password, username);
+    // navigation.navigate("Home");
+    router.push("../home");
+    // navigation.navigate("ConfirmOTP", {
+    //   email: phoneNumber,
+    //   username: username,
+    //   password: username,
+    // });
+  };
+
+  // const sendVerification = async () => {
+  //   const phoneProvider = new PhoneAuthProvider(auth);
+  //   try {
+  //     const verificationId = await phoneProvider.verifyPhoneNumber(phoneNumber, null);
+  //     setVerificationId(verificationId);
+  //     setMessage("Verification code has been sent to your phone.");
+  //   } catch (error) {
+  //     setMessage(`Error: ${error.message}`);
+  //   }
+  // };
 
   return (
     <SafeAreaView className="bg-white relative h-full w-full">
@@ -57,32 +93,39 @@ export default function SignUp() {
         <View className="w-full mb-[50%]">
           <FormField
             title="Username"
-            value={form.username}
-            handleChangeText={(text) => setForm({ ...form, username: text })}
+            value={username}
+            handleChangeText={setUsername}
             placeholder=""
             icon="person-outline"
+            error={usernameIsTaken}
           />
           <FormField
             title="Password"
-            value={form.password}
-            handleChangeText={(text) => setForm({ ...form, password: text })}
+            value={password}
+            handleChangeText={setPassword}
             placeholder=""
             icon="lock-closed-outline"
+            error={false}
           />
 
           <FormField
             title="Phone Number"
-            value={form.phonenumber}
-            handleChangeText={(text) => setForm({ ...form, phonenumber: text })}
+            value={email}
+            handleChangeText={setEmail}
             placeholder=""
-            icon="call-outline"
+            // icon="call-outline"
+            icon="mail-outline"
+            error={emailIsTaken}
           />
         </View>
 
         <CustomButton
           textStyles=""
           title="Lanjut"
-          onPress={() => router.push("../home")}
+          onPress={
+            handleSignUp
+            // router.push("./confirm-otp")
+          }
         />
 
         <View className="flex flex-row items-center mt-2">
@@ -90,6 +133,9 @@ export default function SignUp() {
           <CustomLink
             title="Masuk"
             href="./sign-in"
+            onPress={() => {
+              navigation.navigate("SignIn");
+            }}
           />
         </View>
       </View>

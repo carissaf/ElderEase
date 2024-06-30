@@ -1,15 +1,17 @@
 import React from "react";
 import {Text, View} from "@/components/Themed";
 import {SafeAreaView} from "react-native-safe-area-context";
-import {Inter_400Regular, Inter_700Bold, useFonts} from "@expo-google-fonts/inter";
+import {Inter_400Regular, Inter_500Medium, Inter_700Bold, useFonts} from "@expo-google-fonts/inter";
 import PolygonPurple from "@/assets/images/PolygonPurple.svg";
 import EllipseOrange from "@/assets/images/EllipseOrange.svg";
 import EllipseGreen from "@/assets/images/EllipseGreen.svg";
 import {Image} from "react-native";
 import {LinearGradient} from "expo-linear-gradient";
 import CustomButton from "@/components/CustomButton";
-import {router} from "expo-router";
+import {router, useNavigation} from "expo-router";
 import CustomLink from "@/components/CustomLink";
+import {NativeStackNavigationProp} from "@react-navigation/native-stack";
+import {RootStackParamList} from "@/app/navigation";
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 // function TabBarIcon(props: { name: React.ComponentProps<typeof FontAwesome>["name"]; color: string }) {
@@ -21,12 +23,14 @@ import CustomLink from "@/components/CustomLink";
 //     />
 //   );
 // }
-
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, "Onboarding">;
 export default function TabLayout() {
+  const navigation = useNavigation<NavigationProp>();
   // const colorScheme = useColorScheme();
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
     Inter_700Bold,
+    Inter_500Medium,
   });
 
   if (!fontsLoaded) {
@@ -58,33 +62,45 @@ export default function TabLayout() {
       <PolygonPurple className="absolute top-9 right-[-5%] rotate-[20deg] shadow" />
       <EllipseOrange className="absolute top-[12%] right-[19%]" />
 
-      <View className="bg-white h-3/5 px-10 bottom-0 rounded-t-3xl items-center">
+      <View className="bg-white h-3/5 px-10 bottom-0 rounded-t-3xl items-center justify-between">
         <EllipseGreen className="absolute left-[-15%] bottom-0" />
-        <Text
-          className="text-3xl mt-32 flex w-full text-black"
-          style={{ fontFamily: "Inter_400Regular" }}>
-          Selamat Datang di{" "}
+        <View className="w-full bg-transparent">
           <Text
-            className="text-black"
-            style={{ fontFamily: "Inter_700Bold" }}>
-            ElderEase
+            className="text-3xl mt-32 flex w-full text-black"
+            style={{ fontFamily: "Inter_400Regular" }}>
+            Selamat Datang di{" "}
+            <Text
+              className="text-black"
+              style={{ fontFamily: "Inter_700Bold" }}>
+              ElderEase
+            </Text>
           </Text>
-        </Text>
-        <Text
-          className="mt-5 mb-10 flex w-full text-black"
-          style={{ fontFamily: "Inter_400Regular" }}>
-          ElderEase adalah rekan ramah Anda yang dirancang untuk memudahkan komunikasi bagi para manula. Bergabunglah bersama kami untuk menjadikan
-          interaksi sehari-hari lebih sederhana dan lebih mudah diakses oleh semua orang!
-        </Text>
-        <CustomButton
-          textStyles=""
-          title="Mulai"
-          onPress={() => router.push("../sign-up")}
-        />
-        <CustomLink
-          title="Masuk"
-          href="../sign-in"
-        />
+          <Text
+            className="mt-5 mb-10 flex w-full text-black opacity-50"
+            style={{ fontFamily: "Inter_400Regular" }}>
+            {/*ElderEase adalah rekan ramah Anda yang dirancang untuk memudahkan komunikasi bagi para manula. Bergabunglah bersama kami untuk menjadikan*/}
+            {/*interaksi sehari-hari lebih sederhana dan lebih mudah diakses oleh semua orang!*/}
+            Bergabunglah bersama ElderEase memudahkan interaksi dengan lansia sehari-hari!
+          </Text>
+        </View>
+        <View className="w-full items-center bg-transparent mb-20">
+          <CustomButton
+            textStyles="mb-2"
+            title="Mulai"
+            onPress={() =>
+              // () => navigation.navigate("(auth)", { screen: "SignIn" })
+              router.push("../sign-up")
+            }
+          />
+          <CustomLink
+            title="Masuk"
+            href="../auth/sign-in"
+            onPress={() => {
+              // navigation.navigate("SignIn");
+              router.push("../sign-in");
+            }}
+          />
+        </View>
       </View>
       {/*</LinearGradient>*/}
     </SafeAreaView>

@@ -4,8 +4,11 @@ import { Inter_400Regular, Inter_600SemiBold, Inter_700Bold, useFonts } from "@e
 import { SafeAreaView } from "react-native-safe-area-context";
 import ActivityButton from "@/components/ActivityButton";
 import FeatureButton from "@/components/FeatureButton";
-import { router } from "expo-router";
+import { router, useNavigation } from "expo-router";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { RootStackParamList } from "@/app/navigation";
 
+type NavigationProp = NativeStackNavigationProp<RootStackParamList, "Home">;
 export default function Home() {
   const [fontsLoaded] = useFonts({
     Inter_400Regular,
@@ -17,6 +20,8 @@ export default function Home() {
     text: { fontFamily: "Inter_400Regular" },
     title: { fontFamily: "Inter_700Bold" },
   });
+
+  const navigation = useNavigation<NavigationProp>();
 
   return (
     <SafeAreaView className="h-full mt-5 px-5">
@@ -90,7 +95,10 @@ export default function Home() {
               title="Pengaturan"
               icon="settings-outline"
               color="#5C5C5C"
-              onPress={() => console.log("hhdskfjdfs")}
+              onPress={() => {
+                // navigation.navigate("SettingsOptions");
+                router.push("../settings-options");
+              }}
             />
           </View>
         </View>

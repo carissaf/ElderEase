@@ -44,13 +44,12 @@
         {
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."
         }
-      ]
+      ],
+      "@react-native-firebase/app",
+      "@react-native-firebase/auth"
     ],
     "experiments": {
       "typedRoutes": true
-    },
-    "permissions": [
-      "android.permission.CALL_PHONE"
-    ]
+    }
   }
 }

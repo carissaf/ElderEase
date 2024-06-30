@@ -1,18 +1,20 @@
 import React from "react";
-import { Link } from "expo-router";
+import { Text } from "react-native";
 
 interface CustomLinkProps {
   title: string;
   href: string;
+  onPress: () => void;
 }
 
-function CustomLink({ title, href }: CustomLinkProps) {
+function CustomLink({ title, onPress }: CustomLinkProps) {
   return (
-    <Link
+    <Text
       className="font-bold text-btn-active underline flex text-m"
-      href={href}>
+      // href={href}
+      onPress={onPress}>
       {title}
-    </Link>
+    </Text>
   );
 }
 

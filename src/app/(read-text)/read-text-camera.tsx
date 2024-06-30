@@ -6,7 +6,7 @@ import { CameraType } from "expo-camera/legacy";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "expo-router";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { RootStackParamList } from "@/app/(read-text)/navigation";
+import { RootStackParamList } from "@/app/navigation";
 import * as ImagePicker from "expo-image-picker";
 import CustomButton from "@/components/CustomButton";
 
@@ -120,36 +120,6 @@ export default function ReadTextCamera() {
         console.log("Picture taken:", picture);
         await uploadImage(picture.uri);
       }
-
-      // const picture: CameraCapturedPicture | undefined = await cameraRef.current.takePictureAsync();
-      // if (picture) {
-      //   console.log("Picture taken:", picture);
-      //   const uri = picture.uri;
-      //   const fileType = uri.split(".").pop();
-      //
-      //   const file = await fetch(uri);
-      //   const fileBlob = await file.blob();
-      //   // create form data
-      //   const formData = new FormData();
-      //   formData.append("image", fileBlob, `photo.${fileType}`);
-      //
-      //   try {
-      //     const response = await fetch("http://10.0.2.2:5000/process_img", {
-      //       //192.168.178.158
-      //       method: "GET",
-      //       // body: formData,
-      //     });
-      //
-      //     const data = await response.json();
-      //     console.log(data);
-      //     console.log("dfkads");
-      //   } catch (error: any) {
-      //     console.log(error.stack);
-      //     Object.values(error).forEach((value) => {
-      //       console.log(value);
-      //     });
-      //   }
-      // }
     }
   };
   const uploadImage = async (uri: string) => {
@@ -163,9 +133,8 @@ export default function ReadTextCamera() {
 
     try {
       // http://10.0.2.2:5000/process_img
-      // https://4c5f-140-213-136-24.ngrok-free.app/process_img
       // http://192.168.188.158/process_img
-      const response = await fetch("https://cec6-112-215-225-1.ngrok-free.app/process_img", {
+      const response = await fetch("https://bb53-140-213-31-47.ngrok-free.app/process_img", {
         method: "POST",
         body: formData,
         headers: {

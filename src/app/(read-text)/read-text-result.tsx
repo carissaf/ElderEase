@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Speech from "expo-speech";
 import { useRoute } from "@react-navigation/native";
-import { ReadTextResultRouteProp } from "@/app/(read-text)/navigation";
+import { ReadTextResultRouteProp } from "@/app/navigation";
 import { Ionicons } from "@expo/vector-icons";
 import PolygonPurple from "@/assets/images/PolygonPurple.svg";
 import EllipseOrange from "@/assets/images/EllipseOrange.svg";
@@ -80,13 +80,18 @@ export default function ReadTextResult() {
       <EllipseGreen className="absolute right-[-15%] top-[9%]" />
 
       <View className="justify-center items-center">
-        <Text
-          style={styles.title}
-          className="mb-6 text-2xl">
-          {text}
-        </Text>
+        <View className="max-h-40 min-h-0 align-middle items-center justify-center">
+          <ScrollView>
+            <Text
+              style={styles.title}
+              className="mb-6 text-2xl">
+              {text}
+            </Text>
+          </ScrollView>
+        </View>
+
         <TouchableOpacity
-          className="bg-btn-active flex rounded-full h-20 w-20 items-center justify-center"
+          className="bg-btn-active flex rounded-full h-20 w-20 items-center justify-center mt-3"
           onPress={handlePlayStop}>
           <Ionicons
             color="#FFF"
